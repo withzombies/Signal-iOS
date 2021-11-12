@@ -282,6 +282,12 @@ void uncaughtExceptionHandler(NSException *exception)
 
     OWSLogInfo(@"launchOptions: %@.", launchOptions);
 
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene* scene in UIApplication.sharedApplication.connectedScenes) {
+            scene.sizeRestrictions.minimumSize = CGSizeMake(800, 1200);
+        }
+    }
+    
     [OWSAnalytics appLaunchDidBegin];
 
     return YES;
